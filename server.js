@@ -20,7 +20,9 @@ app.post("/chat", async (req, res) => {
     const message = req.body.message;
 
     if (!message) {
-      return res.status(400).json({ error: "Message required" });
+      return res.status(400).json({
+        error: "Message is required"
+      });
     }
 
     const response = await client.responses.create({
@@ -28,10 +30,15 @@ app.post("/chat", async (req, res) => {
       input: message
     });
 
-    res.json({ reply: response.output_text });
+    res.json({
+      reply: response.output_text
+    });
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "AI response failed" });
+    res.status(500).json({
+      error: "AI से जवाब नहीं मिल पाया"
+    });
   }
 });
 
